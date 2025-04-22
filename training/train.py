@@ -19,9 +19,13 @@ if __name__ == "__main__":
     batch_size = 1
     num_workers = 0
     device = 'cuda'
-
     labels_to_use = [0, 1]
-    transform = transforms.Compose([transforms.ToTensor()])
+
+    # reduce MNIST size from 28X28 to 9X9
+    transform = T.Compose([
+    T.Resize((9, 9), interpolation=T.InterpolationMode.BICUBIC),
+    T.ToTensor()
+        ])
     train_dataset = MnistDataset(train_mode=True, transform=transform, labels_to_use=labels_to_use)
     transform_val = transforms.Compose([transforms.ToTensor()])
     validation_dataset = MnistDataset(train_mode=False, transform=transform_val, labels_to_use=labels_to_use)
