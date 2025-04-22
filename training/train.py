@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import torch
 import torch.nn.functional as T
-
+import torchvision.transforms as Trans
 
 if __name__ == "__main__":
 
@@ -22,9 +22,9 @@ if __name__ == "__main__":
     labels_to_use = [0, 1]
 
     # reduce MNIST size from 28X28 to 9X9
-    transform = T.Compose([
-    T.Resize((9, 9), interpolation=T.InterpolationMode.BICUBIC),
-    T.ToTensor()
+    transform = Trans.Compose([
+    Trans.Resize((9, 9), interpolation=Trans.InterpolationMode.BICUBIC),
+    Trans.ToTensor()
         ])
     train_dataset = MnistDataset(train_mode=True, transform=transform, labels_to_use=labels_to_use)
     transform_val = transforms.Compose([transforms.ToTensor()])
